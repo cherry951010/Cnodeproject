@@ -13,7 +13,7 @@ testdata = [
     ({'accesstoken':accesstoken,'title':'1','tab':'','content':''},400,'标题字数太多或太少'),
     ({'accesstoken':accesstoken,'title':'hellowoed','tab':'ask','content':''},400,'内容不可为空')
 ]
-'/topics'
+
 
 @pytest.mark.parametrize('topic_data,code,errormsg',testdata)
 
