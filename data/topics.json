@@ -1,0 +1,8 @@
+{"test_create_topics": [
+    [{"accesstoken":"1","title":"","tab":"","content":""},401,"错误的accessToken"],
+    [{"accesstoken":"ebb04940-7910-4f74-a175-fe5dd01cb0f9","title":"1111111","tab":"","content":""},400,"必须选择一个版块"],
+    [{"accesstoken":"ebb04940-7910-4f74-a175-fe5dd01cb0f9","title":"","tab":"","content":""},400,"标题不能为空"],
+    [{"accesstoken":"ebb04940-7910-4f74-a175-fe5dd01cb0f9","title":"1","tab":"","content":""},400,"标题字数太多或太少"],
+    [{"accesstoken":"ebb04940-7910-4f74-a175-fe5dd01cb0f9","title":"hellowoed","tab":"ask","content":""},400,"内容不可为空"]
+  ]
+}
