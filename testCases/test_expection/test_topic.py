@@ -26,6 +26,7 @@ def test_create_topic(topic_data,code,errormsg):
     assert res.status_code == code
     assert res.json()['error_msg'] == errormsg
     return jsondata
+    pass
 
 
 
