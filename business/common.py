@@ -1,4 +1,5 @@
 import requests
+from openpyxl import load_workbook
 
 """
 常用功能：
@@ -115,3 +116,19 @@ def Other_token():
     :return:
     """
     return other_token
+def GetExceldata(filename,sheetname):
+    '''
+    openpyxl读取文件
+    '''
+    wb = load_workbook(filename)
+    ws = wb[sheetname]
+    # print(ws['B3'].value) #读取单个单元格
+    print(len(tuple(ws.rows)))
+    test_data = []
+    for x in range(2, len(tuple(ws.rows)) + 1):
+        testcase_data = []
+        for y in range(2, 7):
+            testcase_data.append(ws.cell(row=x, column=y).value)
+            print(ws.cell(row=x, column=y).value)
+        test_data.append(testcase_data)
+    return test_data
