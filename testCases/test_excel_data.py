@@ -2,9 +2,10 @@ import pytest
 import requests
 import json
 
-from openExcel import getExceldata
+from business.common import GetExceldata
 
-test_data = getExceldata()
+
+test_data = GetExceldata('data/data.xlsx','topics')
 @pytest.mark.parametrize('url,method,topic_id,code,msg',test_data)
 def test_create_topic(url,method,topic_id,code,msg):
     if method == 'post':
