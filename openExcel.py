@@ -15,9 +15,19 @@ from openpyxl import Workbook, load_workbook
 '''
 xlrd读取文件
 '''
-# book = xlrd.open_workbook('data/data.xlsx')
-# sheet = book.sheet_by_index(0)
-# print('第一行内容：',sheet.row_values(0))
+book = xlrd.open_workbook('data/data.xlsx')
+sheet = book.sheet_by_index(0)
+print('第一行内容：',list(sheet.row_values(0)))
+
+print(sheet.nrows)
+testdata = []
+for x in (2,sheet.nrows()):
+    testcase_data = []
+    for y in (2,sheet.ncols()):
+        testcase_data.append(sheet.cell(rowx=x,colx=y))
+        print(sheet.cell(rowx=x,colx=y))
+    testdata.append(testcase_data)
+print(testdata)
 # print('第二行内容：',sheet.row_values(1))
 # print('第三行内容：',sheet.row_values(2))
 
