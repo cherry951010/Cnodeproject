@@ -116,7 +116,7 @@ def Other_token():
     :return:
     """
     return other_token
-def GetExceldata(filename,sheetname):
+def GetExceldata(filename,sheetname='Sheet1'):
     '''
     openpyxl读取文件
     '''
