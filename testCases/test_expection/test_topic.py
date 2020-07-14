@@ -6,6 +6,9 @@ import json
 
 import  requests
 import  pytest
+
+from business.file_utils import parse_from_json
+
 defaulturl = 'http://49.233.108.117:3000/api/v1'
 accesstoken = 'ebb04940-7910-4f74-a175-fe5dd01cb0f9'
 # testdata = [
@@ -16,8 +19,9 @@ accesstoken = 'ebb04940-7910-4f74-a175-fe5dd01cb0f9'
 #     ({'accesstoken':accesstoken,'title':'hellowoed','tab':'ask','content':''},400,'内容不可为空')
 # ]
 
-data = json.load(open('data/topics.json',mode='r',encoding='utf8'))
-testdata = data["test_create_topics"]
+# data = json.load(open('data/topics.json',mode='r',encoding='utf8'))
+# testdata = data["test_create_topics"]
+testdata = parse_from_json('data/topics.json')
 @pytest.mark.parametrize('topic_data,code,errormsg',testdata)
 
 
