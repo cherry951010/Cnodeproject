@@ -1,8 +1,6 @@
-import json
-
 from business.common import Create_topic, Get_token, Get_topic_detail, Get_username, Other_token, Get_reply_id, \
 Get_verfily_token, Get_hasnot_number, Get_allmessageNum, Get_markPartMessage
-from data.logger import logger
+from business.logger import logger
 
 accesstoken = 'ebb04940-7910-4f74-a175-fe5dd01cb0f9'
 other_token = '81ccd1d9-be88-43b6-b288-b17293300f32'
