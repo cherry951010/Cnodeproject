@@ -2,6 +2,7 @@ import json
 
 from business.common import Create_topic, Get_token, Get_topic_detail, Get_username, Other_token, Get_reply_id, \
 Get_verfily_token, Get_hasnot_number, Get_allmessageNum, Get_markPartMessage
+from data.logger import logger
 
 accesstoken = 'ebb04940-7910-4f74-a175-fe5dd01cb0f9'
 other_token = '81ccd1d9-be88-43b6-b288-b17293300f32'
@@ -55,6 +56,7 @@ def test_View_topic():
     topic_id = Create_topic(data)
 
     url = defaulturl +'/topic/' + topic_id
+    logger.debug(f'发送请求：{url}')
     res1 = requests.get(url)
     assert  res1.status_code == 200
     jsondata = res1.json()
@@ -62,7 +64,7 @@ def test_View_topic():
     assert data['tab'] == jsondata['data']['tab']
     assert data['content'] in jsondata['data']['content']
 
-    return jsondata
+    # return jsondata
 # print(test_View_topic())
 
 def test_editor_topic():
@@ -79,6 +81,8 @@ def test_editor_topic():
     topic_id = Create_topic(data)
 
     url=defaulturl+'/topics/update'
+    logger.debug(f'发送请求：{url}')
+
     update_data = {
         'accesstoken': Get_token(),
         'title': 'xxxxxxxxxxxxxxxxxx',
@@ -89,6 +93,7 @@ def test_editor_topic():
     # topic_id = Create_topic(data)
 
     res = requests.post(url=url,data=update_data).json()
+
     #更新后的id判断
     update_topicid = res['topic_id']
     assert  topic_id == update_topicid
@@ -114,6 +119,8 @@ def test_topic_collect():
     topic_id = Create_topic(data)
 
     url = defaulturl+'/topic_collect/collect'
+    logger.debug(f'发送请求：{url}')
+
     topic_data = {
         'accesstoken':accesstoken,
         'topic_id':topic_id
@@ -135,6 +142,8 @@ def test_topic_decollect():
     topic_id = Create_topic(data)
     #收藏主题
     url = defaulturl + '/topic_collect/collect'
+    logger.debug(f'发送请求：{url}')
+
     topic_data = {
         'accesstoken': accesstoken,
         'topic_id': topic_id
@@ -143,6 +152,8 @@ def test_topic_decollect():
     assert res['success'] == True
     #取消收藏主题
     url = defaulturl + '/topic_collect/de_collect'
+    logger.debug(f'发送请求：{url}')
+
     topic_data = {
         'accesstoken': accesstoken,
         'topic_id': topic_id
@@ -163,6 +174,7 @@ def test_user_collect():
     }
     username = Get_username(data)
     url = defaulturl + '/topic_collect/' + username
+    logger.debug(f'发送请求：{url}')
     res = requests.get(url=url).json()
     assert res['success'] == True
 
@@ -179,6 +191,8 @@ def test_create_common():
     }
     topic_id = Create_topic(data)
     url = defaulturl+'/topic/'+ topic_id + '/replies'
+    logger.debug(f'发送请求：{url}')
+
     parmas = {
         'accesstoken':Other_token(),
         'content':'666666'
@@ -200,6 +214,8 @@ def test_reply_common():
     #拿到新建帖子ID
     topic_id = Create_topic(data)
     url = defaulturl + '/topic/' + topic_id + '/replies'
+    logger.debug(f'发送请求：{url}')
+
     #新建评论
     replydata ={
         'accesstoken': Other_token(),
@@ -238,6 +254,7 @@ def test_thump():
     # 获取评论ID
     reply_id = Get_reply_id(topic_id, replydata)
     url = defaulturl + '/reply/' + reply_id + '/ups'
+    logger.debug(f'发送请求：{url}')
     thumpdata = {
         'accesstoken':Get_token()
     }
@@ -258,6 +275,7 @@ def test_user_detail():
     }
     username = Get_username(data)
     url = defaulturl + '/user/' + username
+    logger.debug(f'发送请求：{url}')
     res = requests.get(url=url).json()['data']['loginname']
     assert username == res
 
@@ -270,8 +288,10 @@ def test_verfily_token():
         'accesstoken':Get_token()
     }
     url1 = defaulturl+'/accesstoken'
+
     res1 = requests.post(url=url1,data=data).json()
     url = defaulturl+'/accesstoken'
+    logger.debug(f'发送请求：{url}')
     res = Get_verfily_token(url,data)
     assert res[0] == res1['success']
     assert res[1] == res1['loginname']
@@ -286,6 +306,7 @@ def test_hasnot_messsagess():
         'accesstoken':Get_token()
     }
     url = defaulturl+'/message/count'
+    logger.debug(f'发送请求：{url}')
     res1 = Get_hasnot_number(url,data)
     res = requests.get(url=url,data=data).json()
     assert res1[0] == res['success']
@@ -300,6 +321,7 @@ def test_detail_allmessages():
         'accesstoken': Get_token()
     }
     url = defaulturl + '/messages'
+    logger.debug(f'发送请求：{url}')
     res1 = Get_allmessageNum(url, data)
     res = requests.get(url=url, data=data).json()
     read = len(res['data']['has_read_messages'])
@@ -318,6 +340,7 @@ def test_markPartMessages():
     }
     id = Get_markPartMessage(data)
     url = defaulturl+'/message/mark_one/'+id
+    logger.debug(f'发送请求：{url}')
     res = requests.post(url=url,data=data).json()
     assert res['marked_msg_id'] == id
     # return id
